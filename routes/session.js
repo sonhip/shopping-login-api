@@ -105,4 +105,16 @@ Router.get('/reset', async (req, res) => {
   }
 });
 
+Router.get('/clearCookie', (req, res) => {
+  res
+    .status(202)
+    .clearCookie('sessionId', {
+      sameSite: 'none',
+      secure: true,
+    })
+    .json({
+      msg: 'cleared session',
+    });
+});
+
 module.exports = Router;
