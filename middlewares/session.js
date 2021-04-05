@@ -10,8 +10,11 @@ module.exports = (req, res, next) => {
     newSession.save();
 
     res.cookie('sessionId', sessionId, {
-      maxAge: 60 * 60 * 1000 * 24,
+      maxAge: 3600 * 1000 * 24,
       signed: true,
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
     });
   }
 

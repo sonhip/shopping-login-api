@@ -15,6 +15,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(cookieParser(process.env.SESSION_SECRET));
 
 const db = process.env.MONGO_URI;
 
@@ -30,7 +31,6 @@ const { connection } = mongoose;
 connection.once('open', () => {
   console.log('Mongo database connection established successfully');
 });
-app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use('/api/products', sessionMiddleware, require('./routes/products'));
 app.use('/api/users', require('./routes/users'));
