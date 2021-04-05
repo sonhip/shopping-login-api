@@ -114,4 +114,14 @@ Router.get('/user', auth, (req, res) => {
     .then((user) => res.json(user));
 });
 
+// @route GET auth auth/clearCookie
+// @desc Clear Cookie
+// @access Private
+Router.get('/clearCookie', (req, res) => {
+  res
+    .status(202)
+    .clearCookie('token', { sameSite: 'none', secure: true })
+    .json({ msg: 'Logout success' });
+});
+
 module.exports = Router;
