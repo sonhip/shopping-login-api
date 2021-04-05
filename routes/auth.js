@@ -75,8 +75,16 @@ Router.post('/', async (req, res) => {
 
         const updateUser = await User.findById(userExisting.id);
         await Session.findByIdAndUpdate(sessionId, { cart: [] });
+        if (!req.signedCookies.token) {
+          res.cookie('token', token, {
+            maxAge: 3600 * 24 * 1000,
+            signed: true,
+            httpOnly: true,
+            sameSite: 'none',
+            secure: true,
+          });
+        }
         res.json({
-          token,
           user: {
             _id: updateUser.id,
             userName: updateUser.userName,

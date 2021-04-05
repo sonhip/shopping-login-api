@@ -33,9 +33,17 @@ Router.post('/', async (req, res) => {
     process.env.JWT_SECRET,
     { expiresIn: 3600 },
     (err, token) => {
+      if (!req.signedCookies.token) {
+        res.cookie('token', token, {
+          maxAge: 3600 * 24 * 1000,
+          signed: true,
+          httpOnly: true,
+          sameSite: 'none',
+          secure: true,
+        });
+      }
       res.json({
-        token,
-        user: {
+        admin: {
           id: admin.id,
           loginID: admin.loginID,
         },

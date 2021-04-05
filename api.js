@@ -15,7 +15,7 @@ app.use(
 );
 
 app.use(express.json());
-app.use(cookieParser(process.env.SESSION_SECRET));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 const db = process.env.MONGO_URI;
 
