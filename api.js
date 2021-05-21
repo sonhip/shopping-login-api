@@ -7,7 +7,10 @@ dotenv.config();
 
 const app = express();
 
-const whitelist = ["http://localhost:3000"];
+const whitelist = [
+  "http://localhost:3000",
+  "https://shopping-food-drink.web.app",
+];
 
 app.use(
   cors({
